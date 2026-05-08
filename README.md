@@ -1,65 +1,57 @@
-# PK Class
+# PK Class 🏀 ⛓️
 
-## 📌 O que é o PK Class?
-O **PK Class** é um aplicativo de interclasses desenvolvido sobre a blockchain Solana.  
-Seu objetivo é organizar, registrar e acompanhar competições escolares de forma prática, segura e transparente.
+**PK Class** é um dApp (Decentralized Application) construído na blockchain **Solana**, desenhado para revolucionar a forma como as competições interclasses são geridas, registadas e celebradas no ambiente escolar.
 
 ---
 
-## ⚙️ Como funciona?
-
-### 👨‍🏫 Organizadores (professores ou responsáveis)
-Acessam o aplicativo → realizam cadastro com e-mail institucional → criam competições no formato mata-mata → adicionam turmas → registram jogos, resultados e pontuações.
-
-### 👩‍🎓 Alunos
-Acessam o aplicativo → visualizam partidas → acompanham resultados e classificações → salvam eventos de interesse → interagem por meio de comentários.
+## 🌟 O que é o PK Class?
+O PK Class elimina a falta de transparência e o esquecimento dos resultados desportivos escolares. Ao utilizar a rede Solana, transformamos cada golo, ponto e vitória num registo imutável, criando um **Legado Digital** para os alunos e para a instituição.
 
 ---
 
-## 🔐 Verificação de usuários
-- Cadastro de organizadores → permitido apenas com e-mails institucionais válidos  
-- Cadastro de alunos → permitido apenas com e-mails escolares válidos  
+## 🛠️ Stack Técnica (Web3)
+* **Blockchain:** Solana (Devnet/Mainnet)
+* **Smart Contracts:** Rust & Anchor Framework
+* **Frontend:** React/Next.js & Tailwind CSS
+* **Integração:** `@solana/web3.js` & Wallet Adapter
+* **Autenticação:** Validação via E-mail Institucional (Oracle/Backend)
 
 ---
 
-## 🧠 Funcionamento Técnico (o “Como”)
-Cadastro do organizador → Validação por e-mail institucional → Criação do evento esportivo → Registro de equipes e partidas → Inserção dos resultados → Validação do sistema → Registro na blockchain Solana → Consulta pública pelos usuários.
+## ⚡ Problemas que Resolvemos (Dores)
+
+1.  **Caos Operacional:** Substituímos as tabelas de papel e Excel por um fluxo automatizado de chaves (mata-mata) e pontuações.
+2.  **Falta de Transparência:** Em competições escolares, a manipulação de resultados ou erros humanos geram conflitos. No PK Class, uma vez validado o resultado, ele torna-se **imutável** na blockchain.
+3.  **Perda de Memória:** Atualmente, um campeão escolar é esquecido após a formatura. Com o PK Class, as conquistas tornam-se parte de um **Hall da Fama** eterno.
 
 ---
 
-## 👣 Mapeamento da Jornada do Usuário
-Acesso ao aplicativo → Login com e-mail institucional/escolar → Entrada na página inicial → Visualização ou criação de eventos → Interação (acompanhar jogos, registrar resultados ou comentar) → Consulta de histórico ou classificação → Encerramento do evento com registro permanente.
+## 🚀 Diferencial Solana
+* **Velocidade:** Confirmação de placares e interações em segundos.
+* **Baixo Custo:** Taxas (fees) de transação quase nulas, ideais para o ambiente educativo.
+* **Transparência Pública:** Qualquer aluno, encarregado de educação ou professor pode verificar a veracidade dos dados diretamente na rede.
 
 ---
 
-## 🗂️ Registro e Histórico
-Todos os dados (jogos, resultados, participantes e comentários) são registrados de forma permanente na blockchain, garantindo acesso ao histórico completo dos interclasses.
+## ⚙️ Fluxo do Sistema
 
-- Durante o evento → organizadores e alunos podem adicionar fotos ou links externos (como redes sociais)  
-- Após o encerramento → os dados tornam-se imutáveis, não sendo permitidas alterações  
-
----
-
-## 🔗 Esboço de Telas (Wireframe)
-📎 Insira aqui o link do Figma, Canva ou imagem do seu rascunho:  
-`(adicione seu link aqui)`
+1.  **Criação:** O Professor (Organizador) autentica-se com e-mail institucional e cria o evento.
+2.  **Registo:** Equipas são inscritas e as chaves de mata-mata geradas automaticamente.
+3.  **Validação:** Ao fim de cada jogo, o resultado é inserido e assinado, sendo enviado para o *Program* (Smart Contract) na Solana.
+4.  **Consumo:** Os alunos acompanham o feed em tempo real, comentam e visualizam a evolução da sua turma.
 
 ---
 
-## 🚀 Diferencial Blockchain (Solana)
-O uso da blockchain Solana garante:
-
-- **Imutabilidade** → os dados não podem ser alterados após o encerramento do evento  
-- **Transparência** → qualquer usuário pode verificar resultados e registros  
-- **Velocidade e baixo custo** → registros rápidos e eficientes, ideais para atualizações frequentes durante competições  
-
----
-
-## 🏁 Finalização
-Este documento tem como objetivo:
-
-- Validar a lógica do projeto com mentores  
-- Garantir que todas as etapas foram planejadas antes do desenvolvimento do MVP  
-- Demonstrar a estrutura do projeto em camadas: funcionamento, jornada e interface  
+## 🗺️ Roadmap
+- [ ] Implementação do Smart Contract para gestão de torneios.
+- [ ] Dashboard de administrador para Professores.
+- [ ] Perfil do Aluno com histórico de medalhas/títulos.
+- [ ] Integração de fotos dos eventos via IPFS/Arweave.
 
 ---
+
+## 🤝 Contribuir
+Contribuições são bem-vindas! Se tens sugestões para melhorar a lógica dos contratos em Rust ou a experiência do utilizador (UX), abre uma *Issue* ou submete um *Pull Request*.
+
+---
+**PK Class** – *O desporto escolar encontra o futuro da Web3.*
