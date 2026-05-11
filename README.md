@@ -1,11 +1,27 @@
 # PK Class 🏀 ⛓️
 
-**PK Class** é um dApp (Decentralized Application) construído na blockchain **Solana**, desenhado para revolucionar a forma como as competições interclasses são geridas, registadas e celebradas no ambiente escolar.
+**PK Class** é um dApp (Decentralized Application) construído na blockchain **Solana**, desenhado para revolucionar a forma como as competições interclasses são geridas, registadas e celebradas no ambiente escolar, transformando a desorganização física em legado digital.
 
 ---
 
-## 🌟 O que é o PK Class?
-O PK Class elimina a falta de transparência e o esquecimento dos resultados desportivos escolares. Ao utilizar a rede Solana, transformamos cada golo, ponto e vitória num registo imutável, criando um **Legado Digital** para os alunos e para a instituição.
+## 🔍 Dia 1: Descoberta & Ideação
+
+Seguindo as orientações de design de produto para a fase inicial, o PK Class focou em diagnosticar o cenário atual do desporto escolar para garantir uma solução assertiva e de alto impacto.
+
+### 1. Entender o Problema Real
+O desporto escolar é o coração da integração estudantil, mas sofre com uma infraestrutura de dados arcaica. O problema central não é a falta de desporto, mas a **volatilidade da informação**. Os resultados vivem em folhas de papel ou ficheiros locais que se perdem com o tempo, gerando um sentimento de que o esforço e as conquistas dos alunos são efêmeros e sem valor histórico.
+
+### 2. Identificar Dores Importantes
+* **Falta de Transparência:** Suspeitas de favorecimento ou erros humanos na contagem de pontos e tabelas geram conflitos desnecessários entre turmas.
+* **Caos Operacional:** Professores de Educação Física perdem tempo precioso na gestão manual de chaves de torneio (mata-mata) e pontuações.
+* **Perda de Memória:** Atualmente, um campeão escolar é esquecido logo após a formatura. Não existe um histórico centralizado que valide o percurso desportivo do aluno.
+
+### 3. Gerar Ideias e Escolher a Melhor Direção
+Após um processo de ideação que considerou diversas abordagens (desde apps de gestão simples a redes sociais desportivas), a direção escolhida foi a **utilização da Blockchain Solana**. A imutabilidade da rede resolve a dor da transparência, enquanto a alta velocidade e baixo custo de transação permitem uma experiência de utilizador fluida, ideal para o ambiente dinâmico da escola.
+
+### 4. Definir Público e Proposta de Valor
+* **Público-Alvo:** Instituições de ensino, professores de educação física e alunos do ensino básico e secundário.
+* **Proposta de Valor:** *"Transformar o suor do campo em dados eternos"*. Oferecemos uma plataforma de gestão automatizada onde a veracidade dos resultados é garantida pela rede Solana, criando um Hall da Fama digital imutável para cada estudante.
 
 ---
 
@@ -14,44 +30,34 @@ O PK Class elimina a falta de transparência e o esquecimento dos resultados des
 * **Smart Contracts:** Rust & Anchor Framework
 * **Frontend:** React/Next.js & Tailwind CSS
 * **Integração:** `@solana/web3.js` & Wallet Adapter
-* **Autenticação:** Validação via E-mail Institucional (Oracle/Backend)
-
----
-
-## ⚡ Problemas que Resolvemos (Dores)
-
-1.  **Caos Operacional:** Substituímos as tabelas de papel e Excel por um fluxo automatizado de chaves (mata-mata) e pontuações.
-2.  **Falta de Transparência:** Em competições escolares, a manipulação de resultados ou erros humanos geram conflitos. No PK Class, uma vez validado o resultado, ele torna-se **imutável** na blockchain.
-3.  **Perda de Memória:** Atualmente, um campeão escolar é esquecido após a formatura. Com o PK Class, as conquistas tornam-se parte de um **Hall da Fama** eterno.
-
----
-
-## 🚀 Diferencial Solana
-* **Velocidade:** Confirmação de placares e interações em segundos.
-* **Baixo Custo:** Taxas (fees) de transação quase nulas, ideais para o ambiente educativo.
-* **Transparência Pública:** Qualquer aluno, encarregado de educação ou professor pode verificar a veracidade dos dados diretamente na rede.
 
 ---
 
 ## ⚙️ Fluxo do Sistema
-
-1.  **Criação:** O Professor (Organizador) autentica-se com e-mail institucional e cria o evento.
-2.  **Registo:** Equipas são inscritas e as chaves de mata-mata geradas automaticamente.
-3.  **Validação:** Ao fim de cada jogo, o resultado é inserido e assinado, sendo enviado para o *Program* (Smart Contract) na Solana.
-4.  **Consumo:** Os alunos acompanham o feed em tempo real, comentam e visualizam a evolução da sua turma.
-
----
-
-## 🗺️ Roadmap
-- [ ] Implementação do Smart Contract para gestão de torneios.
-- [ ] Dashboard de administrador para Professores.
-- [ ] Perfil do Aluno com histórico de medalhas/títulos.
-- [ ] Integração de fotos dos eventos via IPFS/Arweave.
+1.  **Criação:** O Professor (Organizador) autentica-se e cria o evento desportivo.
+2.  **Registo:** Equipas são inscritas e as chaves de mata-mata são geradas automaticamente "on-chain".
+3.  **Validação:** Ao fim de cada jogo, o resultado é inserido, assinado e enviado para o Smart Contract na Solana.
+4.  **Consumo:** Alunos e encarregados de educação acompanham o feed em tempo real e visualizam o histórico histórico.
 
 ---
 
-## 🤝 Contribuir
-Contribuições são bem-vindas! Se tens sugestões para melhorar a lógica dos contratos em Rust ou a experiência do utilizador (UX), abre uma *Issue* ou submete um *Pull Request*.
+## 🎯 Conclusão: Entregáveis Detalhados
+
+Conforme a metodologia de Ideação, este ciclo encerra com os seguintes pilares fundamentais validados:
+
+### **1. Problema Definido**
+Foi estabelecido que o PK Class resolve a **crise de integridade e memória** nos torneios escolares. O foco não é apenas a pontuação, mas a transição do registo físico vulnerável para o registo digital descentralizado.
+
+### **2. Ideia Validada**
+A utilização da rede Solana foi validada como a infraestrutura técnica ideal. A viabilidade de registar placares como transações permanentes permite que:
+* As pontuações sejam auditáveis por qualquer pessoa em tempo real.
+* O custo operacional seja desprezível (frações de cêntimos por transação), tornando o dApp sustentável para escolas.
+
+### **3. Proposta de Valor Clara**
+O produto entrega três benefícios finais concretos:
+* **Imutabilidade:** Resultados que não podem ser alterados ou apagados após a validação.
+* **Eficiência Automatizada:** Redução drástica da carga administrativa para os professores.
+* **Legado Digital:** Um portfólio de conquistas (medalhas/títulos) que o aluno carrega consigo como parte da sua identidade digital para o futuro.
 
 ---
 **PK Class** – *O desporto escolar encontra o futuro da Web3.*
