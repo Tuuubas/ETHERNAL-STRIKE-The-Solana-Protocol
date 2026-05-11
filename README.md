@@ -1,35 +1,78 @@
 # ETHERNAL STRIKE: The Solana Protocol ⚡⛓️
-> **Imutável. Inquebrável. Lendário.**
+> **O desporto escolar encontra o futuro da Web3.**
 
 ---
 
 ## 1. 🌟 Visão Geral
-O **Ethernal Strike** é um protocolo descentralizado (dApp) de alto desempenho forjado na blockchain **Solana**. Projetado para dominar a gestão de competições, ele elimina a fragilidade dos registos humanos e imortaliza cada confronto numa rede global.
+O **PK Class** é um dApp (*Decentralized Application*) desenhado para a rede **Solana**. O nosso objetivo é transformar a gestão de competições escolares, eliminando processos arcaicos e garantindo que cada vitória seja registada de forma eterna. 
 
-Não gerimos apenas torneios; criamos um **registo eterno de domínio** para equipas e instituições. 💎
+Ao utilizar a tecnologia blockchain, transformamos o esforço dos alunos num **Legado Digital** imutável, acessível e transparente. 💎
 
 ---
 
-## 2. 🛠️ Stack Técnica (Arquitetura de Elite)
+## 2. 🛠️ Stack Técnica (Arquitetura Web3)
 
-| Camada | Tecnologia | Função |
+| Componente | Tecnologia | Função |
 | :--- | :--- | :--- |
-| **Network** | 🟣 Solana | Engine de alta velocidade (TPS) e baixo custo |
-| **Logic** | 🦀 Rust & Anchor | Smart Contracts militares para integridade de dados |
-| **Core** | ⚛️ Next.js 14 | Interface de comando ultra-rápida |
-| **Style** | 🎨 Tailwind CSS | Estética moderna e agressiva |
-| **Bridge** | 🔌 Web3.js | Conexão direta com a infraestrutura da rede |
-| **Storage** | 📦 IPFS / Arweave | Prova visual (fotos/vídeos) descentralizada |
+| **Blockchain** | 🟣 Solana | Infraestrutura de rede rápida e barata |
+| **Smart Contracts** | 🦀 Rust & Anchor | Lógica de negócio segura e *on-chain* |
+| **Frontend** | ⚛️ React/Next.js | Interface moderna e responsiva |
+| **Estilização** | 🎨 Tailwind CSS | Design limpo e intuitivo |
+| **Integração** | 🔌 @solana/web3.js | Comunicação entre App e Blockchain |
+| **Média** | 📦 IPFS / Arweave | Armazenamento descentralizado de fotos |
 
 ---
 
-## 3. 🔄 Fluxo do Protocolo
+## 3. 🔄 Fluxo do Sistema
+O diagrama abaixo ilustra como a informação flui desde a criação do torneio até à imortalização do resultado:
 
-```mermaid
-graph LR
-    A[Organizador] -->|Assinatura Digital| B(Deploy do Evento)
-    B --> C{Ethernal Strike Program}
-    D[Combatentes] -->|On-chain Registry| C
-    E[Resultado] -->|Oracle/Validation| C
-    C --> F[Glória Eterna / Blockchain]
-    F --> G[Medalhas Soulbound - SBT]
+
+
+---
+
+## 4. ⚡ Proposta de Valor: Resolução de Dores
+
+* **🧩 Fim do Caos Operacional:** Adeus às folhas de papel e tabelas de Excel perdidas. O sistema gera chaves de mata-mata automaticamente.
+* **🛡️ Transparência Total:** Uma vez que o resultado entra na blockchain, ninguém o pode alterar. A confiança entre turmas é restaurada.
+* **📜 Memória Eterna (Hall da Fama):** As conquistas escolares já não são esquecidas após a formatura. Elas vivem na carteira digital do aluno para sempre.
+
+---
+
+## 5. 🚀 O Diferencial Solana
+
+1.  **Velocidade (TPS):** Resultados e classificações atualizados em segundos. 🏎️
+2.  **Custo Irrisório:** Taxas de transação de frações de cêntimo, ideal para escolas. 💸
+3.  **Transparência:** Auditoria pública de cada ponto marcado. 🔍
+
+---
+
+## 6. 🗺️ Roadmap de Desenvolvimento
+
+- [ ] **Fase 1:** Implementação do Smart Contract base em Rust. 🏗️
+- [ ] **Fase 2:** Dashboard de Gestão para Professores e Árbitros. 🖥️
+- [ ] **Fase 3:** Perfil do Aluno com Histórico e Vitórias. 🎓
+- [ ] **Fase 4:** Integração de fotos dos eventos via IPFS. 📸
+- [ ] **Fase 5:** Governança (Votação para MVP do torneio). 🗳️
+
+---
+
+## 🏁 Conclusão e Entregáveis Detalhados
+
+O projeto **PK Class** redefine o desporto escolar através da tecnologia. Os entregáveis previstos para a conclusão deste dApp são:
+
+### **📦 Entregáveis Técnicos (On-Chain)**
+* **Smart Contract (Program):** Código-fonte em Rust documentado para gestão de eventos, inscrições e placares.
+* **Deploy Oficial:** Contrato verificado e funcional na rede Solana.
+* **Segurança:** Implementação de controlo de acessos (Admin, Juiz e Aluno).
+
+### **💻 Entregáveis de Interface (Frontend)**
+* **Painel Administrativo:** Interface intuitiva para criação de competições e gestão de equipas.
+* **Portal Público:** Feed dinâmico de jogos, estatísticas e o "Hall da Fama".
+* **Integração Web3:** Sistema de conexão com wallets (Phantom/Solflare).
+
+### **🏆 Ativos e Reconhecimento**
+* **SBTs (Soulbound Tokens):** Medalhas digitais intransferíveis que comprovam os títulos dos alunos.
+* **Documentação:** Guia completo de utilização para a instituição de ensino.
+
+---
+> **PK Class** – *Onde o desporto escolar encontra o futuro da Web3.* 🏅⛓️
