@@ -1,0 +1,19 @@
+import './globals.css';
+import type { Metadata } from 'next';
+import Navbar from '../components/Navbar';
+
+export const metadata: Metadata = {
+  title: 'Ethernal Strike',
+  description: 'Protótipo de site para torneios escolares na Solana',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="pt-BR">
+      <body>
+        <Navbar />
+        {children}
+      </body>
+    </html>
+  );
+}
