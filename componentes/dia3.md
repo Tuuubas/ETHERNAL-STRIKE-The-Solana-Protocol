@@ -4,40 +4,38 @@
 ---
 
 ## 1. 🌟 Visão Geral
-O **Ethernal Strike** é um protocolo descentralizado (dApp) de alto desempenho forjado na blockchain **Solana**. Projetado para dominar a gestão de competições, ele elimina a fragilidade dos registos humanos e imortaliza cada confronto numa rede global.
+O **Ethernal Strike** entra na sua fase mais crítica: a **Execução Técnica**. Deixamos os esboços para trás e entramos no código bruto. O objetivo é materializar o protocolo descentralizado na rede Solana, garantindo que a lógica de "Mata-Mata" e a imutabilidade dos resultados funcionem em harmonia com uma interface de elite.
 
-Não gerimos apenas torneios; criamos um **registo eterno de domínio** para equipas e instituições. 💎
+Estamos a construir não apenas uma aplicação, mas uma infraestrutura de glória eterna. 💎
 
 ---
 
-## 2. 🛠️ Stack Técnica (Arquitetura de Elite)
+## 2. 🛠️ Stack Técnica (Engenharia de Combate)
 
-| Camada | Tecnologia | Função |
+| Camada | Tecnologia | Status no Dia 3 |
 | :--- | :--- | :--- |
-| **Network** | 🟣 Solana | Infraestrutura de rede rápida e barata |
-| **Logic** | 🦀 Rust & Anchor | Smart Contracts seguros e *on-chain* |
-| **Core** | ⚛️ Next.js 14 | Interface moderna e responsiva |
-| **Style** | 🎨 Tailwind CSS | Design limpo e intuitivo |
-| **Bridge** | 🔌 Web3.js | Comunicação entre App e Blockchain |
-| **Storage** | 📦 IPFS / Arweave | Armazenamento descentralizado de fotos |
+| **Frontend** | ⚛️ Next.js 14 & Tailwind | Construção da Interface e Hooks de Wallet |
+| **Logic** | 🦀 Rust & Anchor | Codificação dos Programas (Smart Contracts) |
+| **Client** | 🔌 @solana/web3.js | Conexão entre UI e a Camada On-chain |
+| **Provider** | 💳 Solana Wallet Adapter | Integração com Phantom/Solflare |
+| **Dev Environment** | ⚓ Solana Playground/Local | Deploy inicial e testes de transação |
 
 ---
 
-## 3. 🔄 Estruturando a Solução (Dia 2)
+## 3. ⚙️ Desenvolvimento do MVP (Dia 3)
 
-Conforme as diretrizes de design e arquitetura do cronograma, esta fase foca na materialização técnica da proposta:
+Seguindo o cronograma de "Codar e Conectar", o foco total está na integração sistémica:
 
-* **Definição do Funcionamento:** A solução opera como um mediador imutável entre a ação física (o jogo) e o registo digital (Solana), utilizando validação assinada via e-mail institucional.
-* **Mapeamento da Jornada do Utilizador:**
-    1.  **Professor:** Autenticação -> Criação de Torneio -> Registo de Resultados.
-    2.  **Aluno:** Conexão de Wallet -> Visualização de Rankings -> Recebimento de Medalhas (SBT).
-* **Fluxos Claros:** Implementação de uma lógica de "Mata-Mata" automatizada on-chain para evitar erros manuais de chaveamento.
-* **Wireframes (Esboços):** Telas focadas em *Mobile-First*, priorizando o feed de jogos em tempo real e o perfil de conquistas do atleta.
+* **Montar o Front-end:** Transformação dos wireframes em componentes funcionais. Implementação de *Dashboards* dinâmicos que consomem dados diretamente da blockchain.
+* **Codar Smart Contracts:** Desenvolvimento do programa em Rust responsável por:
+    1. Criar torneios com estados de "Ativo", "Finalizado" e "Cancelado".
+    2. Registar equipas e validar permissões de árbitro.
+    3. Processar vitórias e atualizar a árvore de chaves.
+* **Conectar Tudo:** O momento da verdade. Utilização do Anchor para gerar o IDL e permitir que o Frontend assine transações, alterando o estado global do protocolo na rede.
 
 ```mermaid
-graph TD
-    A[Professor/Organizador] -->|Definição de Regras| B(Estrutura do Torneio)
-    B --> C{Smart Contract - Solana}
-    D[Mapeamento de Jornada] -->|UX/UI| E[Wireframes das Telas]
-    E --> F[Fluxo de Validação de Resultados]
-    F --> G[Registo Imutável]
+graph LR
+    A[Frontend React/Next] ---|RPC Call| B[Solana Network]
+    B --- C{Smart Contract - Rust}
+    C ---|Update State| D[(Blockchain Ledger)]
+    A ---|Auth| E[Wallet Adapter]
