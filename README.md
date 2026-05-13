@@ -60,7 +60,7 @@ O diagrama abaixo ilustra como a informação flui desde a criação do torneio 
 
 ## 🏁 Conclusão e Entregáveis Detalhados
 
-O projeto **PK Class** redefine o desporto escolar através da tecnologia. Os entregáveis previstos para a conclusão deste dApp são:
+O projeto ** ETHERNAL STRIKE** redefine o desporto escolar através da tecnologia. Os entregáveis previstos para a conclusão deste dApp são:
 
 ### **📦 Entregáveis Técnicos (On-Chain)**
 * **Smart Contract (Program):** Código-fonte em Rust documentado para gestão de eventos, inscrições e placares.
@@ -77,6 +77,4 @@ O projeto **PK Class** redefine o desporto escolar através da tecnologia. Os en
 * **Documentação:** Guia completo de utilização para a instituição de ensino.
 
 ---
-> **PK Class** – *Onde o desporto escolar encontra o futuro da Web3.* 🏅⛓️
----
-https://crispy-space-computing-machine-r4xr7gr5qw69cxvjx-3000.app.github.dev/
+> ** ETHERNAL STRIKE** – *Onde o desporto escolar encontra o futuro da Web3.* 🏅⛓️
