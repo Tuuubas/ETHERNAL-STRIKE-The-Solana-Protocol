@@ -76,3 +76,5 @@ O projeto **PK Class** redefine o desporto escolar através da tecnologia. Os en
 
 ---
 > **PK Class** – *Onde o desporto escolar encontra o futuro da Web3.* 🏅⛓️
+---
+https://crispy-space-computing-machine-r4xr7gr5qw69cxvjx-3000.app.github.dev/
