@@ -2,11 +2,13 @@ import type { Tournament } from '../lib/mockData';
 
 type TournamentCardProps = {
   tournament: Tournament;
+  onSelect?: () => void;
+  selected?: boolean;
 };
 
-export default function TournamentCard({ tournament }: TournamentCardProps) {
+export default function TournamentCard({ tournament, onSelect, selected }: TournamentCardProps) {
   return (
-    <article className="card tournament-card">
+    <article className={`card tournament-card${selected ? ' selected' : ''}${onSelect ? ' selectable' : ''}`} onClick={onSelect}>
       <div className="card-header">
         <span className={`status-pill status-${tournament.status.replace(/\s+/g, '-').toLowerCase()}`}>
           {tournament.status}
@@ -19,6 +21,11 @@ export default function TournamentCard({ tournament }: TournamentCardProps) {
         <span>{tournament.teams} equipes</span>
         <span>{tournament.stage}</span>
       </div>
+      {tournament.results?.length ? (
+        <div className="recent-result">
+          Último jogo: {tournament.results[0].teamA} {tournament.results[0].scoreA} x {tournament.results[0].scoreB} {tournament.results[0].teamB}
+        </div>
+      ) : null}
     </article>
   );
 }

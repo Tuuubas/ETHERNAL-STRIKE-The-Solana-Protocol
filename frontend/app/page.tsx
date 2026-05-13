@@ -3,10 +3,10 @@ export default function Home() {
     <section className="page-shell">
       <div className="hero-block">
         <div>
-          <p className="eyebrow">Dia 4 — Construção do site</p>
+          <p className="eyebrow">Dia 4 — O ataque visual está lançado</p>
           <h1>Ethernal Strike</h1>
           <p className="hero-text">
-            Um protótipo funcional para transformar torneios escolares em um registro eterno na Solana.
+            Um protótipo agressivo para transformar torneios escolares em legado eterno na Solana, com impacto visual inspirado na marca.
           </p>
           <div className="button-row">
             <a className="btn-primary" href="/tournaments">Ver torneios</a>
@@ -15,7 +15,7 @@ export default function Home() {
         </div>
         <div className="welcome-card">
           <strong>Proposta</strong>
-          <p>Gestão de torneios, histórico de vitórias e hall da fama em uma interface moderna.</p>
+          <p>Gestão de torneios, histórico de vitórias e hall da fama em uma interface moderna e com identidade de marca.</p>
         </div>
       </div>
 

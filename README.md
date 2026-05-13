@@ -8,6 +8,8 @@ O **PK Class** é um dApp (*Decentralized Application*) desenhado para a rede **
 
 Ao utilizar a tecnologia blockchain, transformamos o esforço dos alunos num **Legado Digital** imutável, acessível e transparente. 💎
 
+> O frontend protótipo do site foi organizado em `frontend/`, com páginas de Torneios, Perfil e Hall da Fama.
+
 ---
 
 ## 2. 🛠️ Stack Técnica (Arquitetura Web3)

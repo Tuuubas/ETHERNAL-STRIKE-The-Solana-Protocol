@@ -1,5 +1,51 @@
 export type TournamentStatus = 'Ativo' | 'Finalizado' | 'Em planejamento';
 
+export type TournamentTeam = {
+  id: string;
+  name: string;
+  players: string[];
+  points: number;
+  wins: number;
+  draws: number;
+  losses: number;
+};
+
+export type TournamentPlayer = {
+  id: string;
+  name: string;
+  teamId: string;
+};
+
+export type TournamentGroup = {
+  name: string;
+  teams: string[];
+};
+
+export type TournamentMedia = {
+  id: string;
+  type: 'image' | 'video' | 'link';
+  url: string;
+  caption: string;
+  createdAt: string;
+};
+
+export type TournamentComment = {
+  id: string;
+  author: string;
+  text: string;
+  createdAt: string;
+};
+
+export type TournamentResult = {
+  id: string;
+  teamA: string;
+  teamB: string;
+  scoreA: number;
+  scoreB: number;
+  note: string;
+  createdAt: string;
+};
+
 export type Tournament = {
   id: string;
   name: string;
@@ -8,6 +54,12 @@ export type Tournament = {
   teams: number;
   stage: string;
   description: string;
+  teamsData?: TournamentTeam[];
+  players?: TournamentPlayer[];
+  groups?: TournamentGroup[];
+  results?: TournamentResult[];
+  media?: TournamentMedia[];
+  comments?: TournamentComment[];
 };
 
 export type HallRecord = {
@@ -28,36 +80,6 @@ export type ProfileInfo = {
   medals: number;
   honor: string;
 };
-
-export const initialTournaments: Tournament[] = [
-  {
-    id: 'pk-class-2026',
-    name: 'PK Class Championship 2026',
-    status: 'Ativo',
-    date: '29/05/2026',
-    teams: 12,
-    stage: 'Quartas de Final',
-    description: 'Torneio escolar de futsal com pontuação on-chain e tabela automatizada.',
-  },
-  {
-    id: 'escolar-open',
-    name: 'Escolar Open Solana',
-    status: 'Em planejamento',
-    date: '15/06/2026',
-    teams: 8,
-    stage: 'Inscrições abertas',
-    description: 'Competição de basquete com histórico eterno e premiação digital.',
-  },
-  {
-    id: 'arena-eternal',
-    name: 'Arena Eternal Strike',
-    status: 'Finalizado',
-    date: '02/05/2026',
-    teams: 16,
-    stage: 'Campeão definido',
-    description: 'Campeonato intercolegial com medalhas SBT para vencedores.',
-  },
-];
 
 export const hallOfFame = [
   {
