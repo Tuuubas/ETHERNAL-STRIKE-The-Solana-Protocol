@@ -13,23 +13,25 @@ export default function LoginPage() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
     if (isSignup) {
-      if (signup(email, password, name)) {
-        // Success, redirect to home
+      const error = await signup(email, password, name);
+      if (!error) {
         router.push('/');
       } else {
-        setError('Email já cadastrado ou inválido.');
+        setError(error);
       }
+      return;
+    }
+
+    const error = await login(email, password);
+    if (!error) {
+      router.push('/');
     } else {
-      if (login(email, password)) {
-        // Success, redirect to home
-        router.push('/');
-      } else {
-        setError('Email ou senha incorretos.');
-      }
+      setError(error);
     }
   };
 
@@ -37,6 +39,7 @@ export default function LoginPage() {
     <div className="login-container">
       <div className="login-card">
         <h1>{isSignup ? 'Criar Conta' : 'Entrar'}</h1>
+        <p className="form-mode">{isSignup ? 'Modo cadastro: use um email novo' : 'Modo login: use sua conta existente'}</p>
         <form onSubmit={handleSubmit}>
           {isSignup && (
             <div>
@@ -75,7 +78,10 @@ export default function LoginPage() {
         <button
           type="button"
           className="btn-secondary"
-          onClick={() => setIsSignup(!isSignup)}
+          onClick={() => {
+            setIsSignup(!isSignup);
+            setError('');
+          }}
         >
           {isSignup ? 'Já tenho conta' : 'Criar conta'}
         </button>
@@ -97,6 +103,12 @@ export default function LoginPage() {
         }
         .login-card h1 {
           text-align: center;
+          margin-bottom: 0.4rem;
+        }
+        .form-mode {
+          text-align: center;
+          font-size: 0.9rem;
+          color: #4b5563;
           margin-bottom: 1rem;
         }
         .login-card div {

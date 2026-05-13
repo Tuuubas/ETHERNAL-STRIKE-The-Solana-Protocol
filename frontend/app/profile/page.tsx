@@ -1,18 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import { profileInfo } from '../../lib/mockData';
+import { useAuth } from '../context/AuthContext';
 
 export default function ProfilePage() {
+  const { user, updateProfile } = useAuth();
   const [connected, setConnected] = useState(false);
   const [wallet, setWallet] = useState('Não conectado');
   const [balance, setBalance] = useState('0 SOL');
 
+  if (!user) {
+    return <div>Você precisa fazer login para ver o perfil.</div>;
+  }
+
   function handleConnect() {
     setConnected(true);
-    setWallet(profileInfo.wallet);
-    setBalance(profileInfo.balance);
+    setWallet('Fg4sH...a9Kz');
+    setBalance('2.14 SOL');
   }
+
+  const isAdmin = user.admin;
+  const updateStat = async (updates: Partial<typeof user>) => {
+    if (!isAdmin) {
+      return;
+    }
+    await updateProfile(updates);
+  };
 
   return (
     <section className="page-shell">
@@ -39,28 +52,48 @@ export default function ProfilePage() {
           <h2>Dados do atleta</h2>
           <dl>
             <dt>Nome</dt>
-            <dd>{profileInfo.name}</dd>
+            <dd>{user.name}</dd>
+            <dt>Email</dt>
+            <dd>{user.email}</dd>
             <dt>Escola</dt>
-            <dd>{profileInfo.school}</dd>
+            <dd>{user.school || 'Sem escola definida'}</dd>
             <dt>Honraria</dt>
-            <dd>{profileInfo.honor}</dd>
+            <dd>{user.honor || 'Sem honraria definida'}</dd>
           </dl>
+          <button type="button" className="btn-secondary" onClick={() => updateProfile({ honor: 'Atleta conectado ao Ethernal Strike' })}>
+            Atualizar honraria
+          </button>
         </div>
 
         <div className="card card-panel stats-grid">
           <div>
-            <span className="stat-value">{profileInfo.games}</span>
+            <span className="stat-value">{user.games}</span>
             <p>Jogos disputados</p>
           </div>
           <div>
-            <span className="stat-value">{profileInfo.victories}</span>
+            <span className="stat-value">{user.victories}</span>
             <p>Vitórias</p>
           </div>
           <div>
-            <span className="stat-value">{profileInfo.medals}</span>
+            <span className="stat-value">{user.medals}</span>
             <p>Medalhas SBT</p>
           </div>
         </div>
+      </div>
+
+      <div className="actions-grid">
+        {!isAdmin ? (
+          <p className="form-message warning">Somente administradores podem registrar jogos, vitórias e medalhas.</p>
+        ) : null}
+        <button type="button" className="btn-primary" disabled={!isAdmin} onClick={() => updateStat({ games: user.games + 1 })}>
+          Registrar jogo disputado
+        </button>
+        <button type="button" className="btn-primary" disabled={!isAdmin} onClick={() => updateStat({ victories: user.victories + 1, games: user.games + 1 })}>
+          Registrar vitória
+        </button>
+        <button type="button" className="btn-primary" disabled={!isAdmin} onClick={() => updateStat({ medals: user.medals + 1 })}>
+          Registrar medalha SBT
+        </button>
       </div>
     </section>
   );

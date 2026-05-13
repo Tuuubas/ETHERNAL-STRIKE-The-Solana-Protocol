@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import TournamentCard from '../../components/TournamentCard';
+import { useAuth } from '../context/AuthContext';
 import { Tournament, TournamentGroup, TournamentPlayer, TournamentTeam } from '../../lib/mockData';
 
 const initialForm = {
@@ -31,6 +32,8 @@ const initialCommentForm = {
 };
 
 export default function TournamentsPage() {
+  const { user, updateProfile } = useAuth();
+  const isAdmin = user?.admin ?? false;
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState('Ativo');
@@ -95,11 +98,13 @@ export default function TournamentsPage() {
   async function persistTournament(updatedTournament: Tournament): Promise<Tournament | null> {
     const response = await fetch(`/api/tournaments/${updatedTournament.id}`, {
       method: 'PATCH',
-      body: JSON.stringify(updatedTournament),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ updates: updatedTournament, adminEmail: user?.email }),
     });
 
     if (!response.ok) {
-      setDetailMessage('Erro ao salvar o torneio.');
+      const errorData = await response.json().catch(() => null);
+      setDetailMessage(errorData?.error ?? 'Erro ao salvar o torneio.');
       return null;
     }
 
@@ -109,8 +114,33 @@ export default function TournamentsPage() {
     return saved as Tournament;
   }
 
+  async function deleteTournament(id: string) {
+    if (!user?.email || !isAdmin) {
+      setDetailMessage('Apenas administradores podem excluir torneios.');
+      return;
+    }
+
+    const response = await fetch(`/api/tournaments/${id}?adminEmail=${encodeURIComponent(user.email)}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      setDetailMessage(errorData?.error ?? 'Erro ao excluir o torneio.');
+      return;
+    }
+
+    setTournaments((current) => current.filter((item) => item.id !== id));
+    setSelectedId(null);
+    setMessage('Torneio excluído com sucesso.');
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!user?.email || !isAdmin) {
+      setMessage('Apenas administradores podem criar torneios.');
+      return;
+    }
 
     const newTournament: Tournament = {
       id: `custom-${Date.now()}`,
@@ -130,11 +160,13 @@ export default function TournamentsPage() {
 
     const response = await fetch('/api/tournaments', {
       method: 'POST',
-      body: JSON.stringify(newTournament),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tournament: newTournament, adminEmail: user.email }),
     });
 
     if (!response.ok) {
-      setMessage('Falha ao criar torneio.');
+      const errorData = await response.json().catch(() => null);
+      setMessage(errorData?.error ?? 'Falha ao criar torneio.');
       return;
     }
 
@@ -156,6 +188,11 @@ export default function TournamentsPage() {
     event.preventDefault();
     if (!selectedTournament) return;
 
+    if (!user?.email || !isAdmin) {
+      setDetailMessage('Apenas administradores podem registrar partidas.');
+      return;
+    }
+
     const result = {
       id: `result-${Date.now()}`,
       teamA: scoreForm.teamA,
@@ -166,11 +203,17 @@ export default function TournamentsPage() {
       createdAt: new Date().toLocaleString('pt-BR'),
     };
 
-    await persistTournament({
+    const saved = await persistTournament({
       ...selectedTournament,
       results: [result, ...(selectedTournament.results ?? [])],
       stage: selectedTournament.status === 'Ativo' ? 'Em andamento' : selectedTournament.stage,
     });
+
+    if (saved && user) {
+      await updateProfile({
+        games: user.games + 1,
+      });
+    }
 
     setScoreForm(initialScoreForm);
     setDetailMessage('Placar registrado com sucesso.');
@@ -349,8 +392,12 @@ export default function TournamentsPage() {
               Descrição do torneio
               <textarea name="description" value={form.description} onChange={handleChange} rows={4} placeholder="Descrição rápida para professores e alunos." />
             </label>
-            <button type="submit" className="btn-primary">Criar torneio</button>
+            <button type="submit" className="btn-primary" disabled={!isAdmin}>Criar torneio</button>
+            {!isAdmin ? <p className="form-message warning">Login de administrador necessário para criar torneios.</p> : null}
           </form>
+          {!isAdmin ? (
+            <p className="form-message warning">Apenas administradores podem criar torneios.</p>
+          ) : null}
           {message ? <p className="form-message">{message}</p> : null}
           {loading ? <p className="form-message">Carregando torneios do banco...</p> : null}
         </div>
@@ -370,7 +417,7 @@ export default function TournamentsPage() {
         </div>
       </div>
 
-      {selectedTournament ? (
+      {selectedTournament && (
         <div className="selected-panel card card-panel">
           <div className="selected-header">
             <div>
@@ -380,14 +427,19 @@ export default function TournamentsPage() {
                 {selectedTournament.stage} • {selectedTournament.teams} equipes
               </span>
             </div>
-            <button type="button" className="btn-secondary" onClick={() => setSelectedId(null)}>
-              Fechar seleção
-            </button>
+            <div className="selected-header-actions">
+              <button type="button" className="btn-danger" disabled={!isAdmin} onClick={() => deleteTournament(selectedTournament.id)}>
+                Excluir torneio
+              </button>
+              <button type="button" className="btn-secondary" onClick={() => setSelectedId(null)}>
+                Fechar seleção
+              </button>
+            </div>
           </div>
+          {!isAdmin ? (
+            <p className="form-message warning">Apenas administradores podem excluir torneios e atualizar partidas.</p>
+          ) : null}
 
-          {detailMessage ? <p className="form-message">{detailMessage}</p> : null}
-
-          <div className="selected-grid">
             <div className="action-box">
               <h3>Pontuar partida</h3>
               <form onSubmit={submitScore} className="form-grid small-form">
@@ -413,7 +465,8 @@ export default function TournamentsPage() {
                   Observação
                   <input name="note" value={scoreForm.note} onChange={handleScoreChange} placeholder="Ex: virada no segundo tempo" />
                 </label>
-                <button type="submit" className="btn-primary">Registrar resultado</button>
+                <button type="submit" className="btn-primary" disabled={!isAdmin}>Registrar resultado</button>
+                {!isAdmin ? <p className="form-message warning">Somente administradores podem registrar partidas.</p> : null}
               </form>
             </div>
 
@@ -559,7 +612,7 @@ export default function TournamentsPage() {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </section>
   );
 }

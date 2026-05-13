@@ -2,21 +2,25 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface User {
+export interface User {
   email: string;
   password: string;
   name: string;
   school: string;
-  description: string;
+  honor: string;
   photo: string;
+  games: number;
+  victories: number;
+  medals: number;
+  admin: boolean;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => boolean;
-  signup: (email: string, password: string, name: string) => boolean;
+  login: (email: string, password: string) => Promise<string | null>;
+  signup: (email: string, password: string, name: string) => Promise<string | null>;
   logout: () => void;
-  updateProfile: (updates: Partial<User>) => void;
+  updateProfile: (updates: Partial<User>) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -35,47 +39,74 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
+    const restoreUser = async () => {
+      try {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser) as User;
+          const response = await fetch(`/api/users?email=${encodeURIComponent(parsedUser.email)}`);
+          if (response.ok) {
+            const latestUser = (await response.json()) as User;
+            setUser(latestUser);
+            localStorage.setItem('user', JSON.stringify(latestUser));
+          } else {
+            setUser(parsedUser);
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao restaurar sessão do usuário:', error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Error loading user from localStorage:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    };
+
+    restoreUser();
   }, []);
 
-  const login = (email: string, password: string): boolean => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUser = users.find((u: User) => u.email === email && u.password === password);
-    if (foundUser) {
+  const login = async (email: string, password: string): Promise<string | null> => {
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        return errorData?.error ?? 'Falha no login.';
+      }
+
+      const foundUser = (await response.json()) as User;
       setUser(foundUser);
       localStorage.setItem('user', JSON.stringify(foundUser));
-      return true;
+      return null;
+    } catch (error) {
+      console.error('Login error:', error);
+      return 'Falha no login. Tente novamente.';
     }
-    return false;
   };
 
-  const signup = (email: string, password: string, name: string): boolean => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.some((u: User) => u.email === email)) {
-      return false; // Email already exists
+  const signup = async (email: string, password: string, name: string): Promise<string | null> => {
+    try {
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, name }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        return errorData?.error ?? 'Falha no cadastro.';
+      }
+
+      const newUser = (await response.json()) as User;
+      setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
+      return null;
+    } catch (error) {
+      console.error('Signup error:', error);
+      return 'Falha no cadastro. Tente novamente.';
     }
-    const newUser: User = {
-      email,
-      password,
-      name,
-      school: '',
-      description: '',
-      photo: '',
-    };
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
-    return true;
   };
 
   const logout = () => {
@@ -83,17 +114,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.removeItem('user');
   };
 
-  const updateProfile = (updates: Partial<User>) => {
-    if (user) {
-      const updatedUser = { ...user, ...updates };
+  const updateProfile = async (updates: Partial<User>) => {
+    if (!user) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user.email, requesterEmail: user.email, updates }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        console.error('Erro ao atualizar perfil', errorData?.error ?? '');
+        return;
+      }
+
+      const updatedUser = (await response.json()) as User;
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const index = users.findIndex((u: User) => u.email === user.email);
-      if (index !== -1) {
-        users[index] = updatedUser;
-        localStorage.setItem('users', JSON.stringify(users));
-      }
+    } catch (error) {
+      console.error('Update profile error:', error);
     }
   };
 
