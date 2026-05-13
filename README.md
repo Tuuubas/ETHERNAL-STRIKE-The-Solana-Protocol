@@ -4,7 +4,7 @@
 ---
 
 ## 1. 🌟 Visão Geral
-O **PK Class** é um dApp (*Decentralized Application*) desenhado para a rede **Solana**. O nosso objetivo é transformar a gestão de competições escolares, eliminando processos arcaicos e garantindo que cada vitória seja registada de forma eterna. 
+O ** ETHERNAL STRIKE** é um dApp (*Decentralized Application*) desenhado para a rede **Solana**. O nosso objetivo é transformar a gestão de competições escolares, eliminando processos arcaicos e garantindo que cada vitória seja registada de forma eterna. 
 
 Ao utilizar a tecnologia blockchain, transformamos o esforço dos alunos num **Legado Digital** imutável, acessível e transparente. 💎
 
