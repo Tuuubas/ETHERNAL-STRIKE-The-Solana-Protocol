@@ -9,5 +9,17 @@
     "games": 0,
     "victories": 0,
     "medals": 0
+  },
+  {
+    "email": "luizemanuel1090@gamil.com",
+    "password": "1090",
+    "name": "luiz",
+    "school": "",
+    "honor": "",
+    "photo": "",
+    "games": 0,
+    "victories": 0,
+    "medals": 0,
+    "admin": false
   }
 ]
